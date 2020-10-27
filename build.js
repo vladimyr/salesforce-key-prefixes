@@ -5,12 +5,13 @@ const fetch = require('isomorphic-unfetch');
 const { parseDOM } = require('htmlparser2');
 const pkg = require('./package.json');
 
-const API_URL = 'https://api.github.com/';
-const UA = `${pkg.name}/${pkg.version} (${pkg.homepage})`;
+const GITHUB_API_URL = 'https://api.github.com/';
+const userAgent = `${pkg.name}/${pkg.version} (${pkg.homepage})`;
 
 (async function () {
-  const html = await fetchGist(pkg.config.gistId);
-  const records = parseHtml(html);
+  const gist = await fetchGist(pkg.config.gistId);
+  const [file] = Object.values(gist.files);
+  const records = parseHtml(file.content);
   const dict = records.reduce((acc, [prefix, type]) => {
     return Object.assign(acc, { [prefix]: type });
   }, {});
@@ -26,15 +27,13 @@ function parseHtml(html) {
   });
 }
 
-async function fetchGist(gistId) {
-  const gistUrl = new URL(`/gists/${gistId}`, API_URL);
+function fetchGist(gistId) {
+  const gistUrl = new URL(`/gists/${gistId}`, GITHUB_API_URL);
   const headers = {
     Accept: 'application/vnd.github.v3+json',
-    'User-Agent': UA
+    'User-Agent': userAgent
   };
-  const gist = await fetchJson(gistUrl, { headers });
-  const [file] = Object.values(gist.files);
-  return file.content;
+  return fetchJson(gistUrl, { headers });
 }
 
 async function fetchJson(url, options) {
