@@ -1,0 +1,51 @@
+{
+  "name": "salesforce-key-prefixes",
+  "version": "0.0.0",
+  "description": "List of Salesforce object key prefixes",
+  "keywords": [
+    "salesforce",
+    "sobject",
+    "id",
+    "key",
+    "prefix"
+  ],
+  "homepage": "https://github.com/vladimyr/salesforce-key-prefixes",
+  "bugs": {
+    "url": "https://github.com/vladimyr/salesforce-key-prefixes/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vladimyr/salesforce-key-prefixes.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Dario Vladovic",
+    "email": "d.vladimyr+dev@gmail.com",
+    "url": "https://github.com/vladimyr"
+  },
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "key-prefixes.json"
+  ],
+  "scripts": {
+    "build": "node build > key-prefixes.json",
+    "lint": "eslint ."
+  },
+  "config": {
+    "gistId": "05f7a742757fce071a09"
+  },
+  "devDependencies": {
+    "@vladimyr/eslint-config": "*",
+    "domutils": "^2.4.2",
+    "eslint": "^7.12.1",
+    "eslint-config-semistandard": "^15.0.1",
+    "eslint-config-standard": "^15.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.2",
+    "htmlparser2": "^5.0.1",
+    "isomorphic-unfetch": "^3.1.0"
+  }
+}
